@@ -293,8 +293,3 @@ void PracticeAudioProcessorEditor::handleNoteOff(juce::MidiKeyboardState* source
 这是一个关于[**成员初始化列表**](../../../C++/成员初始化列表.md)的大坑。。。
 
 虽然说 `.h ` 的声明就是为了让你在 `.cpp` 里为所欲为，但有时还是要注意初始化顺序啊啊啊！
-
-
-
-
-

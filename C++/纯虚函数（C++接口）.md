@@ -31,12 +31,12 @@ e.g.
 #include<iostream>
 #include<cstdio>
 
-class PureVirtualA {//纯虚函数A
+class PureVirtualA { //纯虚函数A
 public:
 	virtual void MethodFromPVA() = 0;
 };
 
-class PureVirtualB {//纯虚函数B
+class PureVirtualB { //纯虚函数B
 	virtual void MethodFromPVB() = 0;
 };
 
@@ -87,10 +87,3 @@ I'm doing method from Pure Virtual B
 
 
 纯虚函数因为其**强制性**，适合用来**规范派生类的行为**.
-
-
-
-
-
-
-

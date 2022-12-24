@@ -49,6 +49,3 @@ int MemorySpace = new int[50];
 ClassName s = new(MemorySpace) ClassName();
 //类型都不是一定的，可以用其他类型
 ```
-
-
-

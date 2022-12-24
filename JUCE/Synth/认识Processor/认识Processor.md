@@ -79,6 +79,3 @@ private:
 **[4]** 关于 `Program` 的 `set` , `get` , `change` 。
 
 **[5]** 关于 `State` 的读写，这将是 [`Plugin` 篇](../../Plugin) 的重点。
-
-
-

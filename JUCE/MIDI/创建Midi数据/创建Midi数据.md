@@ -268,4 +268,3 @@ void PracticeAudioProcessorEditor::addMessageToList(const juce::MidiMessage& mes
 ```
 
 然后在你的 [`timerCallback()` 函数](#定义Timer回调)里用到此函数，就实现了刊登❀~
-

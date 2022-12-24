@@ -12,7 +12,7 @@
 
 首先理解啥是lambda表达式.
 
-lambda表达式实际上是C++11新增的语法糖，可以看看[C++ Lambda表达式的完整介绍](https://zhuanlan.zhihu.com/p/384314474).
+lambda表达式实际上是C++11新增的语法糖，可以看看 [C++ Lambda表达式的完整介绍](https://zhuanlan.zhihu.com/p/384314474).
 
 当我们写出如下lambda表达式：
 
@@ -108,4 +108,3 @@ int main() {
 x实际上并未被改变，而是被正常的常值引用成了形参进入了lambda表达式.
 
 不仅代码更整洁了，甚至还省下了形参复制实参的空间.
-
