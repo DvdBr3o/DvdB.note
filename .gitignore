@@ -1,0 +1,5 @@
+*clangd-trace.json
+
+# program caches
+*.vscode
+*.xmake
