@@ -4,7 +4,7 @@
 
 **概要**：在实际解决方案中的实际项目文件夹中，保留使用库的版本.
 
-​			**大多数正经项目**，建议实际构建源代码，即添加一个包含你所依赖库的项目，并将其编译为静态库 (.a/.lib)			或动态库 (.so/.dll)
+​			**大多数正经项目**，建议实际构建源代码，即添加一个包含你所依赖库的项目，并将其编译为静态库 (.a/.lib) 或动态库 (.so/.dll)
 
 ​			**快速项目 / 拿不到源代码**，链接二进制文件 (.bin)
 
@@ -66,11 +66,11 @@
 
   在需要的文件较开头键入例如`int glfwInit();`.
 
-  **但是！**因为你使用的是C++，而`glfw`实际上是C语言库，所以在C与C++混淆时，需要将其改为：
+  **但是！**因为你使用的是C++，而`glfw`实际上是 C 语言库，所以为了用 C 的 ABI 去链接这个动态库，需要将其改为：
 
   `extern "C" int glfwInit();`
 
-  从而让C++链接器去链接一个C语言库.
+  从而让 C++ 链接器去链接一个 C 语言库.
 
 
 
@@ -126,7 +126,7 @@ Cherno提出了一个问题：为什么即使我不在`属性 >> C/C++ >> 预处
 
 **假设任务**：我们有一个`Game.exe`的程序项目，要为它链接一个自制的`Engine.lib`静态库项目.
 
-in this case，步骤如下：
+in this case (itc)，步骤如下：
 
 + 1 创建空项目`Game`
 
@@ -151,3 +151,37 @@ in this case，步骤如下：
 	右键`Game`项目 (itc)，然后点击`引用`，勾选`Engine`
 
 	这样会使编译等更加自动化，just do it instead of 修改连接器属性.
+
+
+
+Fxxk，我不知道为什么我以前一直用 Visual Studio Solution 构建项目，这很大程度上无法跨平台，而且这样构建项目真的很麻烦。
+
+我根据上面步骤写一下相应的 `xmake.lua` ，看看有多简单：
+
+```lua
+target("Engine")
+	set_kind("static")
+	
+	-- sources --
+	add_headerfiles("Engine/include/**.h") -- 正确做法应该是在两个目录下分别写xmake.lua
+										   -- 这里这样做方便演示
+	add_files("Engine/src/**.cpp")
+	add_includedirs("Engine/include", {public = true})
+
+target("Game")
+	set_kind("binary") -- 可以省略
+
+	-- deps --
+	add_deps("Engine")
+
+	-- sources --
+	add_headerfiles("Game/include/**.h")
+	add_files("Game/src/**.cpp")
+```
+
+然后就：
+
+```bash
+xmake b
+xmake r
+```

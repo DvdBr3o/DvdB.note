@@ -10,18 +10,21 @@
 
 ```cpp
 class Knob {
-private:
-    std::string m_Name;
-    int Value;
-public:
-    Knob(const std::string& Init_Name) :
-        m_Name(Init_Name), Value(0) {}
-    Knob(int Init_Value) :
-        m_Name("Unknown"), Value(Init_Value) {}
+	public: // .cpp 中你不得不先声明变量
+	    std::string m_Name;
+	    int m_Value;    
+
+	public:
+		Knob(const std::string& Init_Name) :
+ 	       m_Name(Init_Name), m_Value(0) {}
+		Knob(int Init_Value) :
+ 	       m_Name("Unknown"), m_Value(Init_Value) {}
+    	
+    	void PrintKnob();
 };
 
-void PrintKnob(Knob aKnob){
-    printf("%s:%d\n",)
+void PrintKnob(const Knob& knob) {
+	printf("%s:%d\n", knob.m_Name.c_str(), knob.m_Value);
 }
 ```
 
@@ -30,9 +33,13 @@ void PrintKnob(Knob aKnob){
 1 **隐式转换**就包含如下操作：
 
 ```cpp
-Knob a = 89;
-Knob b = (std::string)"Volume";
+Knob a = 89; // [1]
+Knob b = std::string{ "Volume" }; // [2]
 ```
+
+[1] 调用了 `operator=(&&another)` ，而 `another` 由 `Knob(int)` 构造
+
+[2] 调用了 `operator=(&&another)` ，而 `another` 由 `Knob(const std::string&)` 构造
 
 ------
 
@@ -40,7 +47,7 @@ Knob b = (std::string)"Volume";
 
 ```cpp
 PrintKnob(114513);
-PrintKnob((std::string)"Volume");
+PrintKnob(std::string{ "Volume" });
 ```
 
 输出：
@@ -59,6 +66,8 @@ PrintKnob("Volume");
 ```
 
 因为要完成此操作，需要`const char*` -> `std::string` -> `Knob`两次隐式转换，但隐式转换一次最多一次.
+
+这确实，要是隐式转换能链式传播，那类型安全无从谈起。这是简洁与安全的平衡。
 
 ------
 
@@ -86,4 +95,4 @@ Knob a = Knob(114514);//用显式构造函数赋值
 Knob b = (Knob)114514;//114514整形强制转化成Knob类
 ```
 
-**意义**：防止性能问题或bug.
+**意义**：防止性能问题或bug，保障类型安全.

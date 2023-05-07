@@ -56,7 +56,7 @@ std::string GetName() //一个api接口
 int main()
 {
 	auto name = GetName();
-	std::cout << name.size() << std::endl;//不自觉地用了.size()
+	std::cout << name.size() << std::endl; //不自觉地用了.size()
 }
 ```
 

@@ -36,7 +36,7 @@ delete[] ptr;
 
 
 
-### placement new优化
+### placement new优化 (*)
 
 **定义**：决定前面的内存指向哪里.
 
@@ -49,3 +49,7 @@ int MemorySpace = new int[50];
 ClassName s = new(MemorySpace) ClassName();
 //类型都不是一定的，可以用其他类型
 ```
+
+**意义:**
+
+用于**内存池的实现**，以及其他**需要尽量少申请内存分配的容器**。
